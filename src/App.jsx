@@ -11,12 +11,12 @@ export default class App extends Component {
     { 
       username: "Bob",
       content: "Has anyone seen my marbles?",
-      id: "1"
+      id: shortid.generate()
     },
     {
       username: "Anonymous",
       content: "No, I think you lost them. You lost your marbles Bob. You lost them for good.",
-      id: "2"
+      id: shortid.generate()
     }
   ]
 }

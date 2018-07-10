@@ -32,14 +32,15 @@ export default class ChatBar extends Component {
         } else {
         username = this.state.username;
         }
-        return this.props.newMessage({message: this.state.message, username: username});
+        this.props.newMessage({message: this.state.message, username: username}) 
+        this.setState({message: ''})
         }
     }
     render() {
     return (
     <footer className="chatbar">
     <input type="text" className="chatbar-username" ref="chatbar-username" onChange={this.onChangeUsername} defaultValue={this.props.currentUser.name} placeholder="Your Name (Optional)"/>
-    <input type="text" className="chatbar-message" placeholder="Type a message and hit ENTER" onChange={this.onChangeMessage} onKeyUp={this.onKeyUp}/>
+    <input type="text" className="chatbar-message" value={this.state.message} placeholder="Type a message and hit ENTER" onChange={this.onChangeMessage} onKeyUp={this.onKeyUp}/>
   </footer>
     )
 }
