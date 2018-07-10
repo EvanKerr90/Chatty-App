@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export default class ChatBar extends Component {
     constructor(props) {
     super(props)
-    this.state = { message: '', username: '', id: ''}
+    this.state = { message: '', username: this.props.currentUser.name}
     this.onKeyUp = this.onKeyUp.bind(this)
     this.onChangeMessage = this.onChangeMessage.bind(this)
     this.onChangeUsername = this.onChangeUsername.bind(this)
@@ -12,14 +12,14 @@ export default class ChatBar extends Component {
     onChangeMessage(event) {
         event.preventDefault()
         this.setState({
-            message: event.target.value,
+            message: event.target.value
         }) 
     }
 
     onChangeUsername(event) {
         event.preventDefault()
         this.setState({
-            username: event.target.value,
+            username: event.target.value
         }) 
     }
 
@@ -32,7 +32,7 @@ export default class ChatBar extends Component {
         } else {
         username = this.state.username;
         }
-        return this.props.newMessage({message: this.state.message, username: username, id: this.state.id});
+        return this.props.newMessage({message: this.state.message, username: username});
         }
     }
     render() {
