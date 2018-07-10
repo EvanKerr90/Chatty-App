@@ -4,7 +4,7 @@ import MessageList from './MessageList.jsx'
 const shortid = require('shortid');
 
 export default class App extends Component {
-  constructor(props) {
+  constructor() {
   super()
   this.state = {currentUser: {name: "Bob"},
   messages: [
