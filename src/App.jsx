@@ -6,7 +6,8 @@ export default class App extends Component {
   constructor() {
   super()
   this.state = {currentUser: {name: "Bob"},
-  messages: []
+  messages: [],
+  userCount: '0'
 }
 this.newMessage = this.newMessage.bind(this)
 this.newCurrentUser = this.newCurrentUser.bind(this)
@@ -15,12 +16,15 @@ this.socket = new WebSocket('ws://localhost:3001')
 
 
 newCurrentUser(username) {
-this.setState({currentUser:{name: username}})
+let content = this.state.currentUser.name + " has changed their name to " + username + "."
+let newMessage = JSON.stringify({type: 'postNotification', content: content})
+this.socket.send(newMessage)
+this.setState({currentUser: {name: username}})
 }
 
 
 newMessage(content) {
-   let newMessage = JSON.stringify({username: this.state.currentUser.name, content: content});
+   let newMessage = JSON.stringify({username: this.state.currentUser.name, content: content, type: "postMessage"});
    this.socket.send(newMessage)
     }
 
@@ -33,16 +37,24 @@ componentDidMount() {
      console.log('Connected to server');
  }
   this.socket.onmessage = (event) => {
-    let messages = this.state.messages.concat(JSON.parse(event.data))
-     this.setState({messages: messages})
+    let data = JSON.parse(event.data)
+    if (data.type === 'userCount') {
+      //console.log(users)
+      this.setState({userCount: data.size})
+    } else {
+    let messages = this.state.messages.concat(data)
+      this.setState({messages: messages})
+    }
+    }
   }
-}
+
 
   render() {
     return (
         <div>
         <nav className="navbar">
-          <a href="/" className="navbar-brand">Chatty</a>
+          <a href="/" className="navbar-brand" >Chatty</a>
+          <span className="user-count" key='1' >{this.state.userCount} users online</span>
         </nav>
         <MessageList messages={this.state.messages}/>
         <ChatBar ws={this.socket} currentUser={this.state.currentUser} newMessage={this.newMessage} newCurrentUser={this.newCurrentUser}/>

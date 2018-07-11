@@ -1,13 +1,23 @@
 import React, {Component} from 'react';
 import Message from './Message.jsx';
 
-export default class MessageList extends Component  {
-constructor(props) {
-super(props)
+function Notification(props) { 
+    return (
+<div className="notification">
+  <span className="notification-content">{props.message.content}</span>
+</div>
+    )
 }
-render() {
-const messages = this.props.messages.map((message) => {
-return <Message key={message.id} message={message}/>
+
+export default function MessageList(props)  {
+
+const messages = props.messages.map((message) => {
+   switch(message.type) { 
+       case 'incomingNotification':
+       return <Notification message={message} key={message.id}/>;
+       default: 
+       return <Message key={message.id} message={message}/>
+    }   
 })
 return (
 <main className="messages">
@@ -17,4 +27,4 @@ return (
 </main>
     )
 }
-}
+
