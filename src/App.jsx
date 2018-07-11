@@ -21,11 +21,15 @@ export default class App extends Component {
   ]
 }
 this.newMessage = this.newMessage.bind(this)
+this.newCurrentUser = this.newCurrentUser.bind(this)
 }
 
+newCurrentUser(username) {
+this.setState({currentUser:{name: username}})
+}
 
 newMessage(content) {
-  const newMessage = {id: shortid.generate(), username: content.username, content: content.message};
+  const newMessage = {id: shortid.generate(), username: this.state.currentUser.name, content: content};
   const messages = this.state.messages.concat(newMessage)
    this.setState({messages: messages})
 }
@@ -39,7 +43,7 @@ newMessage(content) {
           <a href="/" className="navbar-brand">Chatty</a>
         </nav>
         <MessageList messages={this.state.messages}/>
-        <ChatBar currentUser={this.state.currentUser} newMessage={this.newMessage}/>
+        <ChatBar currentUser={this.state.currentUser} newMessage={this.newMessage} newCurrentUser={this.newCurrentUser}/>
       </div>
       )
       }
