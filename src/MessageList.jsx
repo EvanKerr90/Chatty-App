@@ -1,9 +1,12 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Message from './Message.jsx';
+
+
+
 
 function Notification(props) { 
     return (
-<div className="notification">
+<div className="notification" id={props.message.id}>
   <span className="notification-content">{props.message.content}</span>
 </div>
     )
