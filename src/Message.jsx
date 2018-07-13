@@ -12,7 +12,10 @@ export default function Message(props) {
     return (
 <div className="message" id={props.message.id}>
 <span className="message-username" style={{color: props.message.color}}>{props.message.username}</span>
-<span className="message-content">{props.message.content}{displayImages}</span>
+<div className="messsage-images">
+<span className="message-content" className="speech-bubble">{props.message.content}</span>
+<div className="images">{displayImages}</div>
+</div>
 </div>
     )
 
@@ -20,7 +23,7 @@ export default function Message(props) {
     return (
 <div className="message" id={props.message.id}>
 <span className="message-username" style={{color: props.message.color}}>{props.message.username}</span>
-<span className="message-content">{props.message.content}</span>
+<span className="message-content" className="speech-bubble">{props.message.content}</span>
 </div>
     )
 }
