@@ -8,16 +8,38 @@ export default class App extends Component {
   super()
   this.state = {currentUser: {name: "Anonymous", color: this.randomColor()},
   messages: [],
-  userCount: '0'
+  userCount: '0',
+  appColor: 'red'
 }
 this.newMessage = this.newMessage.bind(this)
 this.newCurrentUser = this.newCurrentUser.bind(this)
 this.imageTest = this.imageTest.bind(this)
+this.newAppColor = this.newAppColor.bind(this)
+this.newUserColor = this.newUserColor.bind(this)
+this.randomColor = this.randomColor.bind(this)
 this.socket = new WebSocket('ws://localhost:3001')
 }
 
 randomColor() {
   return "#"+((1<<24)*Math.random()|0).toString(16)
+}
+
+
+newAppColor(color) {
+  if (color === 'random') {
+  this.setState({appColor: this.randomColor()}) 
+  } else {
+  this.setState({appColor: color})
+  }
+}
+
+
+newUserColor(color) {
+  if (color === 'random') {
+    this.setState(prevState => ({currentUser: {name: prevState.currentUser.name, color: this.randomColor()}}))
+  } else {
+    this.setState(prevState => ({currentUser: {name: prevState.currentUser.name, color: color}}))
+  }
 }
 
 
@@ -86,12 +108,12 @@ componentDidMount() {
   render() {
     return (
         <div>
-        <nav className="navbar">
+        <nav className="navbar" style={{backgroundColor: this.state.appColor}}>
           <a href="/" className="navbar-brand" >Chatty</a>
           <span className="user-count">{this.state.userCount} users online</span>
         </nav>
         <MessageList messages={this.state.messages}/>
-        <ChatBar currentUser={this.state.currentUser.name} newMessage={this.newMessage} newCurrentUser={this.newCurrentUser}/>
+        <ChatBar currentUser={this.state.currentUser.name} newUserColor={this.newUserColor} newAppColor={this.newAppColor} newMessage={this.newMessage} appColor={this.state.appColor} newCurrentUser={this.newCurrentUser}/>
       </div>
       )
       }
