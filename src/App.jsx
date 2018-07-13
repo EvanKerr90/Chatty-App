@@ -6,7 +6,7 @@ import MessageList from './MessageList.jsx'
 export default class App extends Component {
   constructor() {
   super()
-  this.state = {currentUser: {name: "Anonymous", color: this.randomColor()},
+  this.state = {currentUser: {name: "Anonymous"},
   messages: [],
   userCount: '0',
   appColor: 'red'
@@ -24,7 +24,6 @@ randomColor() {
   return "#"+((1<<24)*Math.random()|0).toString(16)
 }
 
-
 newAppColor(color) {
   if (color === 'random') {
   this.setState({appColor: this.randomColor()}) 
@@ -32,7 +31,6 @@ newAppColor(color) {
   this.setState({appColor: color})
   }
 }
-
 
 newUserColor(color) {
   if (color === 'random') {
@@ -97,6 +95,8 @@ componentDidMount() {
     let data = JSON.parse(event.data)
      if (data.type === 'userCount') {
       this.setState({userCount: data.size})
+    } else if (data.type === 'color') {
+      this.newUserColor(data.color)
     } else {
     let messages = this.state.messages.concat(data)
       this.setState({messages: messages})

@@ -74,13 +74,9 @@ body {
 
 .message-image {
   max-width: 60%;
-  max-height: 60%;
   float: left;
 }
 
-.image-div {
-
-}
 
 .notification {
   display: flex;
@@ -122,4 +118,8 @@ body {
   float: right;
   position: relative;
   padding: 20px;
+}
+
+.buttons {
+  flex: 3;
 }

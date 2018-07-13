@@ -75,6 +75,7 @@ export default class ChatBar extends Component {
     <footer className="chatbar" style={{backgroundColor: this.props.appColor}}>
     <input type="text" className="chatbar-username" onChange={this.onChangeUsername} onKeyUp={this.onKeyUpUsername} defaultValue={this.props.currentUser.name} placeholder="Your Name (Optional)"/>
     <input type="text" className="chatbar-message" value={this.state.message} placeholder="Type a message and hit ENTER" onChange={this.onChangeMessage} onKeyUp={this.onKeyUpMessage}/>
+    <div className="buttons">
     <span className="color-buttons">
     <input type="button" className="color-button" value="red" onClick={this.onClickColor}/>
     <input type="button" className="color-button" value="blue" onClick={this.onClickColor}/>
@@ -86,6 +87,7 @@ export default class ChatBar extends Component {
     <input type="button" className="change-button" style={{backgroundColor: this.state.buttonColor.buttonAppColor}} value="app color" onClick={this.onClickSelect}/>
     <input type="button" className="change-button" style={{backgroundColor: this.state.buttonColor.buttonUserColor}} value="username color" onClick={this.onClickSelect}/>
     </span>
+    </div>
   </footer>
     )
 }
