@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import ChatBar from './ChatBar.jsx'
 import MessageList from './MessageList.jsx'
 
+
 export default class App extends Component {
   constructor() {
   super()
@@ -27,20 +28,22 @@ this.socket.send(newMessage)
 this.setState(prevState => ({currentUser: {name: username, color: prevState.currentUser.color}}))
 }
 
-imageTest(contentString) {
-  //const testRegex = /^https?:\/\/(?:[a-z\-]+\.)+[a-z]{2,6}(?:\/[^\/#?]+)+\.(?:jpe?g|gif|png)$/;
+ imageTest(contentString) {
   const testRegex = /(jpe?g|gif|png)(?=\?.+|$)/
   const contentArray = contentString.split(' ')
-  let url;
-  contentArray.forEach(function(word) {
-    if (testRegex.test(word)) {
-      url = word
-  } 
+  let url = []
+  let newContentString = []
+   contentArray.forEach(function(word) {
+     if (testRegex.test(word)) {
+       url.push(word)
+   } else {
+    newContentString.push(word)
+   }
   })
-  if (url) {
+  if (url.length > 0) {
     return {
       url: url,
-     content: contentString.replace(url, '')
+     content: newContentString.join(' '),
    }
   } else {
   return contentString;
@@ -51,7 +54,7 @@ imageTest(contentString) {
 newMessage(content) {
   let imageUrl = this.imageTest(content)
   if (imageUrl.url) {
-  let newMessage = JSON.stringify({username: this.state.currentUser.name, content: imageUrl.content, type: "postMessage", color: this.state.currentUser.color, image: imageUrl.url});
+  let newMessage = JSON.stringify({username: this.state.currentUser.name, content: imageUrl.content, type: "postMessage", color: this.state.currentUser.color, images: imageUrl.url});
   console.log(imageUrl)
    this.socket.send(newMessage)
     } else {
