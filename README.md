@@ -4,3 +4,5 @@ A real time chat application bui;t using React,Babel, Webpack and WebSockets. Us
 
 ## Screenshots
 
+!["Screenshot of user changing their name and posting messages to another user who responds"](https://github.com/SmugSnake/Chatty-App/blob/master/docs/Chatty-Screenshot.png?raw=true)
+!["Screenshot of second user receiving first user's messages and responding, including alternate color scheme and multiple images"](https://github.com/SmugSnake/Chatty-App/blob/master/docs/Chatty-Screenshot2.png?raw=true)
