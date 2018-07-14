@@ -58,16 +58,16 @@ export default class ChatBar extends Component {
         this.props.newAppColor(event.target.value)
         } else {
             this.props.newUserColor(event.target.value)
-    } 
+        } 
 }
 
     onClickSelect(event) {
         event.preventDefault()
         if (event.target.value === 'app color') {
-        this.setState(prevState => ({...prevState, buttonColor: {buttonAppColor: 'red', buttonUserColor: 'white'}}))
+        this.setState(prevState => ({...prevState, buttonColor: {buttonAppColor: 'red', buttonUserColor: 'white', buttonFontColour: 'white'}}))
         } else {
-            this.setState(prevState => ({...prevState, buttonColor: {buttonAppColor: 'white', buttonUserColor: 'red'}}))
-            }
+            this.setState(prevState => ({...prevState, buttonColor: {buttonAppColor: 'white', buttonUserColor: 'red', buttonFontColor: 'white'}}))
+        }
     }
 
     render() {
@@ -81,6 +81,8 @@ export default class ChatBar extends Component {
     <input type="button" className="color-button" value="blue" onClick={this.onClickColor}/>
     <input type="button" className="color-button" value="green" onClick={this.onClickColor}/>
     <input type="button" className="color-button" value="yellow" onClick={this.onClickColor}/>
+    <input type="button" className="color-button" value="black" onClick={this.onClickColor}/>
+    <input type="button" className="color-button" value="white" onClick={this.onClickColor}/>
     <input type="button" className="color-button" value="random" onClick={this.onClickColor}/>
     </span>
     <span className="change-buttons">

@@ -23,6 +23,7 @@ this.socket = new WebSocket('ws://localhost:3001')
 randomColor() {
   return "#"+((1<<24)*Math.random()|0).toString(16)
 }
+  
 
 newAppColor(color) {
   if (color === 'random') {
@@ -112,8 +113,8 @@ componentDidMount() {
           <a href="/" className="navbar-brand" >Chatty</a>
           <span className="user-count">{this.state.userCount} users online</span>
         </nav>
-        <MessageList messages={this.state.messages}/>
-        <ChatBar currentUser={this.state.currentUser.name} newUserColor={this.newUserColor} newAppColor={this.newAppColor} newMessage={this.newMessage} appColor={this.state.appColor} newCurrentUser={this.newCurrentUser}/>
+        <MessageList messages={this.state.messages} fontColour={this.state.fontColor}/>
+        <ChatBar fontColour={this.state.fontColor} currentUser={this.state.currentUser.name} newFontColor={this.newFontColor} newUserColor={this.newUserColor} newAppColor={this.newAppColor} newMessage={this.newMessage} appColor={this.state.appColor} newCurrentUser={this.newCurrentUser}/>
       </div>
       )
       }
